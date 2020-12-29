@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-	Vector a(3, 2, 1), b(1, 2, 3);
+	Vector a(3, 2), b(1, 2);
 	Vector c;
 	c = a + b;
 	c.print();
