@@ -1,11 +1,29 @@
 #include <iostream>
 #include "Vector.h"
+#include <SFML/Graphics.hpp>
 using namespace std;
+using namespace sf;
 
-int main() {
-	Vector a(3, 2), b(1, 2);
-	Vector c;
-	c = a + b;
-	c.print();
+int main()
+{
+	// Объект, который, собственно, является главным окном приложения
+	RenderWindow window(VideoMode(200, 200), "SFML Works!");
+
+	// Главный цикл приложения. Выполняется, пока открыто окно
+	while (window.isOpen())
+	{
+		// Обрабатываем очередь событий в цикле
+		Event event;
+		while (window.pollEvent(event))
+		{
+			// Пользователь нажал на «крестик» и хочет закрыть окно?
+			if (event.type == Event::Closed)
+				// тогда закрываем его
+				window.close();
+		}
+		// Отрисовка окна	
+		window.display();
+	}
+
 	return 0;
 }
