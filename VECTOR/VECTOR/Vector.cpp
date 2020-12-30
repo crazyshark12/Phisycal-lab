@@ -1,5 +1,6 @@
 #include "Vector.h"
 #include <iostream>
+#include <SFML/Graphics.hpp>
 Vector::Vector()
 {
 	x = 0;
