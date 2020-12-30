@@ -1,5 +1,5 @@
 ﻿  main.cpp
-C:\Users\User\Documents\GitHub\VECTOR\VECTOR\VECTOR\main.cpp(3,10): fatal error C1083: Не удается открыть файл включение: SFML/Graphics.hpp: No such file or directory,
   Vector.cpp
-C:\Users\User\Documents\GitHub\VECTOR\VECTOR\VECTOR\Vector.cpp(3,10): fatal error C1083: Не удается открыть файл включение: SFML/Graphics.hpp: No such file or directory,
   Создание кода...
+  LINK : не найден или не выполнена сборка D:\GitHub\Phisycal-lab\VECTOR\x64\Debug\VECTOR.exe при последней инкрементной компоновке; выполняется полная компоновка
+  VECTOR.vcxproj -> D:\GitHub\Phisycal-lab\VECTOR\x64\Debug\VECTOR.exe
