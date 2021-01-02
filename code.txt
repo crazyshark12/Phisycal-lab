@@ -1,0 +1,115 @@
+#include <iostream>
+#include "Vector.h"
+#include <vector>
+#include <SFML/Graphics.hpp>
+
+using namespace sf;
+
+int main()
+{
+	// Объект, который, собственно, является главным окном приложения
+	RenderWindow window(VideoMode(1200, 1000), "SFML Works!");
+	Mouse mouse;
+	Vector2f m;
+	int ButtonNumber = 0;
+    std::vector<CircleShape> CircleObjects;
+	std::vector<RectangleShape> RectangleObjects;
+
+	// Главный цикл приложения. Выполняется, пока открыто окно
+	while (window.isOpen())
+	{
+		// Обрабатываем очередь событий в цикле
+		Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::MouseButtonPressed)
+			{
+				if (event.mouseButton.button == Mouse::Left )
+				{
+					Vector2i mi = mouse.getPosition(window);
+					m.x = (float)mi.x;
+					m.y = (float)mi.y;
+					if (m.x > 0 && m.x < 100)
+					{
+						int i = (int)(m.y / 100);
+						ButtonNumber = i+1;
+						std::cout << i;
+					}
+					else
+					{
+						if (ButtonNumber == 1)
+						{
+							CircleShape Circle(200);
+							Circle.setFillColor(Color(255, 255, 0));
+							Circle.setPosition(m.x- Circle.getRadius(), m.y - Circle.getRadius());
+							CircleObjects.push_back(Circle);
+
+						}
+						if (ButtonNumber == 2)
+						{
+							CircleShape Triangle(200,3);
+							Triangle.setFillColor(Color(255, 255, 0));
+							Triangle.setPosition(m.x - Triangle.getRadius(), m.y - Triangle.getRadius());
+							CircleObjects.push_back(Triangle);
+						}
+						if (ButtonNumber == 3)
+						{
+							RectangleShape Floor(Vector2f(400,100));
+							Floor.setFillColor(Color(255, 255, 0));
+							Floor.setPosition(m.x - Floor.getSize().x / 2, m.y - Floor.getSize().y / 2);
+							RectangleObjects.push_back(Floor);
+						}
+					}
+				}
+			}
+			
+			// Пользователь нажал на «крестик» и хочет закрыть окно?
+			if (event.type == Event::Closed)
+				// тогда закрываем его
+				window.close();
+		}
+		// Отрисовка окна
+		window.clear(Color(255, 255, 255, 0));
+
+		for (int i = 0; i < RectangleObjects.size(); i++) //фигуры
+		{
+			window.draw(RectangleObjects[i]);
+		}
+		for (int i = 0; i < CircleObjects.size(); i++) //фигуры
+		{
+			window.draw(CircleObjects[i]);
+		}
+		// отрисовка кнопочек
+		{
+		RectangleShape interface(Vector2f(100, 1000));
+		interface.setFillColor(Color(0, 0, 255));
+		window.draw(interface);
+		RectangleShape a[3];
+		for (int i = 0; i < 3; i++) //красные кнопочки
+		{
+			a[i].setSize(Vector2f(98, 98));
+			a[i].setPosition(2, 2 + i * 100);
+			a[i].setFillColor(Color(255, 0, 0));
+			window.draw(a[i]);
+		}
+
+		{
+			CircleShape CircleButton(40);
+			CircleButton.setFillColor(Color(0, 255, 0));
+			CircleButton.setPosition(10, 10);
+			CircleShape TriangleButton(40, 3);
+			TriangleButton.setFillColor(Color(0, 255, 0));
+			TriangleButton.setPosition(10, 110);
+			RectangleShape FloorButton(Vector2f(80, 20));
+			FloorButton.setFillColor(Color(0, 255, 0));
+			FloorButton.setPosition(10, 240);
+			window.draw(CircleButton);
+			window.draw(TriangleButton);
+			window.draw(FloorButton);
+		}
+	} 
+		window.display();
+	}
+
+	return 0;
+}
